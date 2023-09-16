@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div>
+      <header>
+        <nav class="bg-gradient-to-r from-gray-900 via-blue to-blue-950">
+          <div
+            class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+          >
+            <a href="" class="flex items-center">
+              <img
+                src="assets/images/logo/full_logo_white.png"
+                class="h-28 mr-10px"
+                alt="Nexus Meet Logo"
+              />
+            </a>
+            <button
+              data-collapse-toggle="navbar-default"
+              type="button"
+              class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="navbar-default"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+              <ul
+                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 bg-gradient-to-r from-gray to-blue-950 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="block py-2 pl-3 pr-4 text-xl text-white bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                    aria-current="page"
+                    >Inicio</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                    aria-current="page"
+                    >Acerca De</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                    aria-current="page"
+                    >Eventos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                    aria-current="page"
+                    >Iniciar Sesión</a
+                  >
+                </li>
+                <li>
+                  <!-- Modal toggle -->
+                  <!-- <button
+                    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button"
+                  >
+                    Toggle modal
+                  </button> -->
+                  <button
+                    data-modal-target="defaultModal"
+                    data-modal-toggle="defaultModal"
+                    class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                    (click)="openModal()"
+                    aria-current="page">
+                    Registrar Evento
+                  </button>
+
+                  <!-- Main modal -->
+                  <div
+                    id="defaultModal"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50"
+                    *ngIf="modalService.isModalOpen"
+                  >
+                    <add-event></add-event> <!-- Agrega el componente del modal -->
+                  </div>
+
+                  <!-- <button
+                    *ngIf="!isModalOpen"
+                    class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                    (click)="openModal()"
+                    aria-current="page">
+                    Registrar Evento
+                  </button>
+
+                  <add-event *ngIf="isModalOpen"></add-event> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <div class="bg-gradient-to-b from-gray-500 via-blue-100 to-white-950">
+      <div class="relative bg-gray-600/50 rounded-lg p-4 w-4/5 mx-auto">
+        <div
+          id="controls-carousel"
+          class="relative w-full"
+          data-carousel="static"
+        >
+          <!-- Carousel wrapper -->
+          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="https://img.freepik.com/fotos-premium/operador-camara-video-trabajando-su-equipo-evento-interior_44344-333.jpg?w=1060"
+                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="..."
+              />
+            </div>
+            <!-- Item 2 -->
+            <div
+              class="hidden duration-700 ease-in-out"
+              data-carousel-item="active"
+            >
+              <img
+                src="https://img.freepik.com/foto-gratis/salon-banquetes-decorado-mesa-redonda-servida-centro-mesa-hortensias-sillas-chiavari_8353-10059.jpg?w=996&t=st=1662586503~exp=1662587103~hmac=370e6bd8eb5009deede78fe2c488dcb326d8bc36f4ea119076470c47a9173916"
+                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="..."
+              />
+            </div>
+            <!-- Item 3 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="https://img.freepik.com/fotos-premium/gente-feliz-baila-concierto-fiesta-discoteca_31965-6829.jpg?w=1060"
+                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="..."
+              />
+            </div>
+          </div>
+          <!-- Slider controls -->
+          <button
+            type="button"
+            class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-prev
+          >
+            <!-- Botón de diapositiva anterior -->
+          </button>
+          <button
+            type="button"
+            class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-next
+          >
+            <!-- Botón de diapositiva siguiente -->
+          </button>
+        </div>
+      </div>
+      <app-list [eventsList]="events"></app-list>
+    </div>
+  </body>
+</html>
+<router-outlet></router-outlet>
