@@ -20,7 +20,21 @@ export class EventService {
     return await this.eventsDataSource.getEventos();
   }
 
+  async getEventsByUser(userId: number): Promise<EventData[]> {
+    return await this.eventsDataSource.getEventosByUser(userId);
+  }
+
   addEvent(formData: FormData) {
     return this.http.post(this.apiUrl + 'events/create/', formData);
+  }
+
+  deleteEvent(eventId: number): Observable<any>{
+    return this.http.delete(`${this.apiUrl}delete-events/${eventId}`);
+  }
+
+  updateEvent(eventId: number, eventData: any): Observable<any> {
+    const url = `${this.apiUrl}update_events/${eventId}/`;
+
+    return this.http.put(url, eventData);
   }
 }

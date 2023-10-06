@@ -22,4 +22,14 @@ export class EventDataSource {
       return []; // Devuelve un array vacío en caso de error
     }
   }
+
+  async getEventosByUser(userId: number): Promise<EventData[]> {
+    try {
+      const data = await this.http.get<EventData[]>(`${this.apiUrl}events-by-user/${userId}`).toPromise();
+      return data!;
+    } catch (error) {
+      console.error('Error al obtener los eventos:', error);
+      throw error; // Reenvía el error para que se maneje en el componente
+    }
+  }
 }

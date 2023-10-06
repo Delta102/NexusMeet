@@ -1,0 +1,59 @@
+
+<style>
+.rounded-box{
+      border-radius: 15px;
+  }
+</style>
+
+<div class="bg-gradient-to-b from-gray-900 via-blue to-blue-950 min-h-screen" id="gestionar-eventos" *ngIf="isLoggedIn && isPromotor">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-box w-11/12 md:w-3/4 lg:w-1/2 p-4 md:flex md:space-x-4">
+            <!-- Mitad Izquierda: Imágenes -->
+            <div class="md:w-1/2 flex items-center">
+                <img [src]="logoBlack" alt="Imagen 1" class="h-28 mr-10px">
+            </div>
+
+            <!-- Mitad Derecha: Texto -->
+            <div class="md:w-1/2 mt-4 md:mt-0">
+              <h2 class="text-2xl font-semibold">Bienvenido {{ userData['email'] }}</h2>
+              <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget ex vel purus feugiat facilisis. Sed id dolor auctor, tincidunt tortor eget, vehicula turpis.</p>
+
+              <div class="md:w-1/2 mt-4 md:mt-0">
+                <h2 class="text-2xl font-semibold">Eventos del usuario</h2>
+                <div class="mt-4">
+                  <button
+                    *ngIf="isLoggedIn"
+                    data-modal-target="registerModal"
+                    data-modal-toggle="registerModal"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+                    (click)="openRegisterModal()"
+                    aria-current="page"
+                  >
+                    Crear Evento
+                  </button>
+                  <div
+                    id="registerModal"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50"
+                    *ngIf="modalService.isRegisterEventModalOpen"
+                  >
+                    <add-event [userId]="userData['id']"></add-event> <!-- Agrega el componente del modal -->
+                  </div>
+                </div>
+                <div *ngFor="let evento of eventos" class="mt-4 p-2 border border-gray-300 rounded-md">
+                  <div>
+                    <p>Aquí estarán todos los eventos del Usuario logueado</p>
+                    <p class="text-2xl font-semibold">{{ evento.event_name }}</p>
+                    <p class="text-gray-600">{{ evento.date_event_start | date }}</p>
+                  </div>
+                  <div class="mt-2">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded" (click)="deleteEvent(evento.id)">
+                      Eliminar
+                    </button>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

@@ -71,34 +71,88 @@
                   >
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
-                    aria-current="page"
-                    >Iniciar Sesión</a
-                  >
-                </li>
-                <li>
                   <button
-                    data-modal-target="defaultModal"
-                    data-modal-toggle="defaultModal"
-                    class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
-                    (click)="openModal()"
-                    aria-current="page">
-                    Registrar Evento
+                  *ngIf="!isLoggedIn"
+                  data-modal-target="loginModal"
+                  data-modal-toggle="loginModal"
+                  class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                  (click)="openLoginModal()"
+                  aria-current="page">
+                    Iniciar Sesión
                   </button>
 
                   <!-- Main modal -->
                   <div
-                    id="defaultModal"
+                    id="loginModal"
                     tabindex="-1"
                     aria-hidden="true"
                     class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50"
-                    *ngIf="modalService.isModalOpen"
+                    *ngIf="modalService.isLoginModalOpen"
                   >
-                    <add-event></add-event> <!-- Agrega el componente del modal -->
+                    <app-login></app-login> <!-- Agrega el componente del modal -->
                   </div>
                 </li>
+
+
+                <li>
+                  <button
+                  *ngIf="!isLoggedIn"
+                  data-modal-target="loginModal"
+                  data-modal-toggle="loginModal"
+                  class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                  (click)="openRegisterModal()"
+                  aria-current="page">
+                    Registrar Usuario
+                  </button>
+
+                  <!-- Main modal -->
+                  <div
+                  id="defaultModal"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50"
+                    *ngIf="modalService.isRegisterModalOpen"
+                  >
+                  <add-user></add-user> <!-- Agrega el componente del modal -->
+                  </div>
+                </li>
+
+                <li>
+                  <button
+                  *ngIf="isLoggedIn"
+                  class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                  aria-current="page"
+>
+                    Mi Perfil
+                  </button>
+                </li>
+                                  <!-- [routerLink]="['/manage-events', userData['id'] ]"
+                  [fragment]="'gestionar-eventos'" -->
+
+                <li>
+                  <button
+                  *ngIf="isLoggedIn && isPromotor"
+                  class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                  aria-current="page"
+                  [routerLink]="['/manage-events', userData['id'] ]"
+                  [fragment]="'gestionar-eventos'">
+                    Gestionar de Eventos
+                  </button>
+                </li>
+
+
+
+                <li>
+                  <button
+                  *ngIf="isLoggedIn"
+                  class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
+                  (click)="logout()"
+                  aria-current="page">
+                    Cerrar Sesión
+                  </button>
+                </li>
+
+
               </ul>
             </div>
           </div>
@@ -160,8 +214,9 @@
           </button>
         </div>
       </div>
-      <app-list [eventsList]="events"></app-list>
+
     </div>
+    <app-list [eventsList]="events"></app-list>
   </body>
 </html>
 <router-outlet></router-outlet>

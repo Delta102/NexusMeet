@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { ModalCommunicationService } from '../../services/visualservices/modal-comunication.service';
-import { EventData } from '../../interfaces/event-data.interface';
-import { EventService } from '../../services/event.service';
+import { Component, Input } from '@angular/core';
+import { ModalCommunicationService } from '../../../services/visualservices/modal-comunication.service';
+import { EventData } from '../../../interfaces/event-data.interface';
+import { EventService } from '../../../services/event.service';
 
 @Component({
   selector: 'add-event',
@@ -9,10 +9,13 @@ import { EventService } from '../../services/event.service';
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent {
+  @Input() userId!: number;
   constructor(public modalService: ModalCommunicationService, private eventService: EventService) {}
 
+
+
   closeModal() {
-    this.modalService.closeModal(); // Cierra el modal
+    this.modalService.closeRegisterEventModal(); // Cierra el modal
   }
 
   eventData: EventData = {
@@ -48,7 +51,7 @@ export class AddEventComponent {
     formData.append('protocols', this.eventData.protocols);
     formData.append('capacity', this.eventData.capacity.toString()); // Convierte a cadena
     formData.append('entry_price', this.eventData.entry_price.toString()); // Convierte a cadena
-    formData.append('user_id', this.eventData.user_id.toString()); // Convierte a cadena
+    formData.append('creator', this.userId.toString()); // Convierte a cadena
 
     console.log('asdf'+formData);
 
