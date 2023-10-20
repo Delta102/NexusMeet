@@ -6,7 +6,6 @@ import { EventService } from '../../../services/event.service';
 @Component({
   selector: 'add-event',
   templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent {
   @Input() userId!: number;
@@ -20,37 +19,36 @@ export class AddEventComponent {
 
   eventData: EventData = {
     id: 0,
-    date_event_start: new Date(''),
-    event_name: '',
-    name_event_image: '',
-    event_image: '', // Cambiado a null para manejarlo como archivo
-    description: '', // Agregado
-    protocols: '', // Agregado
+    dateEventStart: new Date(''),
+    eventName: '',
+    eventImage: '',
+    description: '',
     capacity: 0,
-    entry_price: 0,
-    user_id: 0
+    entryPrice: 0,
+    userId: 0,
+    latitude: 0,
+    longitude: 0,
+    entryType: ''
   };
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
     console.log('Archivo seleccionado:', file); // Verifica si el archivo se selecciona correctamente
-    this.eventData.event_image = file;
+    this.eventData.eventImage = file;
   }
 
   onSubmit() {
     console.log('Datos a enviar:', this.eventData);
     const formData = new FormData();
 
-    const formattedDate = this.eventData.date_event_start.toString();
+    const formattedDate = this.eventData.dateEventStart.toString();
 
     formData.append('date_event_start', formattedDate);
-    formData.append('event_name', this.eventData.event_name);
-    formData.append('name_event_image', this.eventData.name_event_image);
-    formData.append('event_image', this.eventData.event_image);
+    formData.append('event_name', this.eventData.eventName);
+    formData.append('event_image', this.eventData.eventImage);
     formData.append('description', this.eventData.description);
-    formData.append('protocols', this.eventData.protocols);
     formData.append('capacity', this.eventData.capacity.toString()); // Convierte a cadena
-    formData.append('entry_price', this.eventData.entry_price.toString()); // Convierte a cadena
+    formData.append('entry_price', this.eventData.entryPrice.toString()); // Convierte a cadena
     formData.append('creator', this.userId.toString()); // Convierte a cadena
 
     console.log('asdf'+formData);

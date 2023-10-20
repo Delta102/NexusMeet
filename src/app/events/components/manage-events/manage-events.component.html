@@ -44,8 +44,8 @@
                 <div *ngFor="let evento of eventos" class="mt-4 p-2 border border-gray-300 rounded-md">
                   <div>
                     <p>Aquí estarán todos los eventos del Usuario logueado</p>
-                    <p class="text-2xl font-semibold">{{ evento.event_name }}</p>
-                    <p class="text-gray-600">{{ evento.date_event_start | date }}</p>
+                    <!-- <p class="text-2xl font-semibold">{{ evento.event_name }}</p>
+                    <p class="text-gray-600">{{ evento.date_event_start | date }}</p> -->
                   </div>
                   <div class="mt-2">
                     <button class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded" (click)="deleteEvent(evento.id)">

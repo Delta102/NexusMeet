@@ -1,0 +1,57 @@
+<shared-navbar></shared-navbar>
+
+<div class="bg-gradient-to-b from-gray-500 via-blue-100 to-white-950">
+
+  <div class="relative bg-gray-600/50 rounded-lg p-4 w-4/5 mx-auto">
+    <div id="controls-carousel" class="relative w-full" data-carousel="static">
+
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            src="https://img.freepik.com/fotos-premium/operador-camara-video-trabajando-su-equipo-evento-interior_44344-333.jpg?w=1060"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+          />
+        </div>
+
+        <div
+          class="hidden duration-700 ease-in-out"
+          data-carousel-item="active"
+        >
+          <img
+            src="https://img.freepik.com/foto-gratis/salon-banquetes-decorado-mesa-redonda-servida-centro-mesa-hortensias-sillas-chiavari_8353-10059.jpg?w=996&t=st=1662586503~exp=1662587103~hmac=370e6bd8eb5009deede78fe2c488dcb326d8bc36f4ea119076470c47a9173916"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+          />
+        </div>
+
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+          <img
+            src="https://img.freepik.com/fotos-premium/gente-feliz-baila-concierto-fiesta-discoteca_31965-6829.jpg?w=1060"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+          />
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-prev
+      >
+
+      </button>
+      <button
+        type="button"
+        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-next
+      >
+      </button>
+
+    </div>
+  </div>
+
+  <app-list [eventsList]="eventList"></app-list>
+
+</div>

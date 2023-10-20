@@ -1,12 +1,13 @@
 export interface EventData {
   id:               number;
-  date_event_start: Date;
-  event_name:       string;
-  name_event_image: string;
-  event_image:      string;
+  dateEventStart:   Date;
+  eventName:        string;
+  eventImage:       string;
   description:      string;
-  protocols:        string;
+  latitude:         number;
+  longitude:         number;
   capacity:         number;
-  entry_price:      number;
-  user_id:          number;
+  entryPrice:       number;
+  entryType:        string;
+  userId:          number;
 }

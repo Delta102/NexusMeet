@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventData } from '../../interfaces/event-data.interface';
 
 @Component({
@@ -6,7 +6,7 @@ import { EventData } from '../../interfaces/event-data.interface';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent {
+export class ListComponent{
   @Input()
   public eventsList: EventData[] = [];
 }
