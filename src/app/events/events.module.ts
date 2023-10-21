@@ -11,6 +11,7 @@ import { EditEventComponent } from './components/manage-events/edit-event/edit-e
 import { DeleteEventComponent } from './components/manage-events/delete-event/delete-event.component';
 import { EventCardImageComponent } from './components/event-card-image/event-card-image.component';
 import { DetailEventComponent } from './components/manage-events/detail-event/detail-event.component';
+import { EventMapComponent } from './components/event-map/event-map.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DetailEventComponent } from './components/manage-events/detail-event/de
     EditEventComponent,
     DeleteEventComponent,
     EventCardImageComponent,
-    DetailEventComponent
+    DetailEventComponent,
+    EventMapComponent
   ],
 
   imports: [

@@ -4,6 +4,8 @@ import { EventDataSource } from '../datasources/event.datasource';
 import { apiConfig } from 'src/app/config/api-config';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import * as mapboxgl from 'mapbox-gl';
+import { environment } from 'src/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ export class EventService {
   constructor(
     private eventsDataSource: EventDataSource,
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   getEvents(): void {
     this.http.get<EventData[]>(`${ this.apiUrl }events/`)
@@ -42,6 +45,26 @@ export class EventService {
       })
   }
 
+  getEvent(eventId: number): Observable<EventData> {
+    return this.http.get(`${this.apiUrl}event/${eventId}`).pipe(
+      map((data: any) => {
+        return {
+          id: data.id,
+          dateEventStart: new Date(data.dateEventStart),
+          eventName: data.event_name,
+          eventImage: data.event_image,
+          description: data.description,
+          latitude: data.latitude,
+          longitude: data.longitude,
+          capacity: data.capacity,
+          entryPrice: data.entry_price,
+          entryType: data.entry_type,
+          userId: data.user_id
+        } as EventData;
+      })
+    );
+  }
+
   async getEventsByUser(userId: number): Promise<EventData[]> {
     return await this.eventsDataSource.getEventosByUser(userId);
   }
@@ -59,4 +82,6 @@ export class EventService {
 
     return this.http.put(url, eventData);
   }
+
+
 }
