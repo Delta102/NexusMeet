@@ -50,7 +50,7 @@ export class EventService {
       map((data: any) => {
         return {
           id: data.id,
-          dateEventStart: new Date(data.dateEventStart),
+          dateEventStart: new Date(data.date_event_start),
           eventName: data.event_name,
           eventImage: data.event_image,
           description: data.description,

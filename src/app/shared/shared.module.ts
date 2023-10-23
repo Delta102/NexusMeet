@@ -7,9 +7,6 @@ import { MainComponent } from './pages/home/main.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UsersModule } from '../users/users.module';
 import { EventsModule } from '../events/events.module';
-import { EventCardImageComponent } from '../events/components/event-card-image/event-card-image.component';
-
-
 
 @NgModule({
   declarations: [
@@ -19,7 +16,6 @@ import { EventCardImageComponent } from '../events/components/event-card-image/e
   imports: [
     CommonModule,
     RouterModule,
-    UsersModule,
     EventsModule
   ],
   exports: [

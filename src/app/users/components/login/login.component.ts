@@ -4,9 +4,8 @@ import { ModalCommunicationService } from 'src/app/events/services/visualservice
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'users-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
 
@@ -14,6 +13,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
+  message: string = '';
 
 
   constructor(private userService: UserService, private modalService: ModalCommunicationService, private router: Router) {}
@@ -28,13 +28,15 @@ export class LoginComponent {
       (response) => {
         // Manejar el inicio de sesión exitoso
         console.log('Inicio de sesión exitoso', response);
-        window.location.reload();
+        this.message = 'Inicio de sesión exitoso';
 
+        setTimeout(() => {
+          this.router.navigate(['']);
+        }, 700);
       },
       (error) => {
-        // Manejar el error de inicio de sesión
         console.error('Error de inicio de sesión', error);
-        this.errorMessage = 'Credenciales inválidas'; // Mostrar un mensaje de error al usuario
+        this.errorMessage = 'Credenciales inválidas';
       }
     );
   }

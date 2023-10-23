@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventsModule } from './events/events.module';
 import { SharedModule } from './shared/shared.module';
+import { EntryModule } from './entry/entry.module';
+import { UsersModule } from './users/users.module';
 
 
 @NgModule({
@@ -16,7 +18,6 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    EventsModule,
     HttpClientModule,
     SharedModule
   ],

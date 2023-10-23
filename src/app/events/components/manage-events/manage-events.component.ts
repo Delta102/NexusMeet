@@ -22,7 +22,7 @@ export class ManageEventsComponent {
   constructor(private route: ActivatedRoute, private userService: UserService, public modalService: ModalCommunicationService, private eventService: EventService) {}
 
   ngOnInit(): void {
-    let userId: number; // Declarar userId fuera de la función subscribe
+    let userId: number;
 
     this.route.params.subscribe(async (params) => {
       userId = +params['userId']; // Convierte el parámetro userId a un número

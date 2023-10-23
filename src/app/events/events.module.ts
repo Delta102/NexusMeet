@@ -1,4 +1,4 @@
-import { NgModule, forwardRef } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EventDataSource } from './datasources/event.datasource';
@@ -12,6 +12,7 @@ import { DeleteEventComponent } from './components/manage-events/delete-event/de
 import { EventCardImageComponent } from './components/event-card-image/event-card-image.component';
 import { DetailEventComponent } from './components/manage-events/detail-event/detail-event.component';
 import { EventMapComponent } from './components/event-map/event-map.component';
+import { EntryModule } from '../entry/entry.module';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { EventMapComponent } from './components/event-map/event-map.component';
     CommonModule,
     FormsModule,
     EventsRoutingModule,
+    EntryModule,
     HttpClientModule,
   ],
   exports: [

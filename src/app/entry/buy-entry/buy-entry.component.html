@@ -1,0 +1,204 @@
+<div
+  class="bg-gradient-to-t from-gray-900/80 via-blue to-blue-950/80 p-6 rounded-lg md:flex md:space-x-6 justify-center items-center"
+>
+  <div class="md:w-1/2">
+    <!-- COLUMNA 1 -->
+    <div class="bg-gray-200 rounded-lg p-4">
+      <img
+        src="assets/images/logo/full_logo_black.png"
+        class="h-28 mr-10px"
+        alt="Nexus Meet Logo"
+      />
+    </div>
+  </div>
+
+  <div class="md:w-1/2">
+    <form
+      class="relative w-full max-w-2xl max-h-full bg-gray-200 rounded-lg p-4"
+      (ngSubmit)="onSubmit()"
+      enctype="multipart/form-data"
+    >
+      <div
+        class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600"
+      >
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          Comprar Entradas
+        </h3>
+        <button
+          type="button"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          (click)="closeBuyModal()"
+          data-modal-hide="defaultModal"
+        >
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+            />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="p-6 space-y-6">
+        <div class="relative z-0 w-full mb-6 group">
+
+          <input
+            type="text"
+            name="email"
+            id="floating_name"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+          />
+          <label
+            for="floating_name"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Email del Usuario</label
+          >
+        </div>
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="text"
+            name="firstName"
+            id="floating_fistname"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+          />
+          <label
+            for="floating_fistname"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Primer Nombre:</label
+          >
+        </div>
+
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="text"
+            name="firstName"
+            id="floating_secondName"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+          />
+          <label
+            for="floating_secondName"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Segundo Nombre:</label
+          >
+        </div>
+        <div class="relative z-0 w-full mb-6 group flex items-center">
+          <div id="card-icons">
+            <img src="assets/visa.svg" height="40" width="50" id="visa-icon" alt="Visa" style="display: none" />
+            <img src="assets/mastercard.svg" height="40" width="50" id="mastercard-icon" alt="Mastercard" style="display: none" />
+
+            <img src="assets/dinersclub.svg" height="40" width="50" id="dinersclub-icon" alt="DinersClub" style="display: none" />
+            <img src="assets/amex.svg" height="40" width="50" id="amex-icon" alt="American Express" style="display: none" />
+          </div>
+          &nbsp;
+          <input
+            type="text"
+            name="creditCardNumber"
+            id="floating_creditCardNumber"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+            pattern="[0-9]*"
+            maxlength="16"
+            (input)="detectCreditCardType($event)"
+          />
+          <label
+            for="floating_creditCardNumber"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Número de Tarjeta de Crédito</label
+          >
+        </div>
+
+        <div class="flex space-x-4"> <!-- Usamos una clase flex para colocar los campos uno al lado del otro -->
+          <div class="relative z-0 w-1/2 mb-6 group"> <!-- 50% de ancho para cada campo -->
+            <input
+              type="text"
+              name="cvv"
+              id="floating_cvv"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+              maxlength="3"
+            />
+            <label
+              for="floating_cvv"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >CVV</label>
+          </div>
+
+          <div class="relative z-0 w-1/2 mb-6 group"> <!-- 50% de ancho para cada campo -->
+            <input
+              type="text"
+              name="expiryDate"
+              id="floating_expiryDate"
+              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              required
+              pattern="[0-9]{2}/[0-9]{2}"
+            />
+            <label
+              for="floating_expiryDate"
+              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >Fecha de Expiración (MM/YY)</label>
+          </div>
+        </div>
+
+        <div class="relative z-0 w-full mb-6 group">
+          <select
+            name="ticketQuantity"
+            id="floating_ticketQuantity"
+            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            [(ngModel)]="entryResponse.quantity"
+            required
+          >
+            <option value="1">1 Entrada</option>
+            <option value="2">2 Entradas</option>
+            <option value="3">3 Entradas</option>
+            <option value="4">4 Entradas</option>
+          </select>
+          <label
+            for="floating_ticketQuantity"
+            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Cantidad de Entradas</label>
+        </div>
+      </div>
+
+      <!-- BOTONES -->
+      <div
+        class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600"
+      >
+        <button
+          data-modal-hide="defaultModal"
+          type="submit"
+          class="text-white bg-blue-950 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Comprar
+        </button>
+
+        <button
+          data-modal-hide="defaultModal"
+          type="button"
+          class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+          (click)="closeBuyModal()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

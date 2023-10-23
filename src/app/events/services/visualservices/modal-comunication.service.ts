@@ -5,11 +5,20 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ModalCommunicationService {
-  public isLoginModalOpen = false; // Variable para controlar el modal de Iniciar Sesión
-  public isRegisterModalOpen = false; // Variable para controlar el modal de Registrar Usuario
+  public isLoginModalOpen = false;
+  public isRegisterModalOpen = false;
   public isRegisterEventModalOpen = false;
   public isUpdateEventModalOpen = false;
   public isDeleteEventModalOpen = false;
+  public isBuyEntryModalOpen = false;
+
+  openBuyModal() {
+    this.isBuyEntryModalOpen = true;
+  }
+
+  closeBuyModal() {
+    this.isBuyEntryModalOpen = false;
+  }
 
   openLoginModal() {
     this.isLoginModalOpen = true;

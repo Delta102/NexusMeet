@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { EventData } from 'src/app/events/interfaces/event-data.interface';
-import { EventService } from 'src/app/events/services/event.service';
+import { Router } from '@angular/router';
 import { ModalCommunicationService } from 'src/app/events/services/visualservices/modal-comunication.service';
 import { UserService } from 'src/app/users/services/user.service';
 
@@ -19,11 +17,9 @@ export class NavbarComponent {
   constructor(
     public modalService: ModalCommunicationService,
     private userService: UserService,
-    private eventService: EventService,
+    private router: Router
   ) {
   }
-
-
 
   async ngOnInit(): Promise<void> {
 
@@ -47,7 +43,6 @@ export class NavbarComponent {
 
   openLoginModal() {
     this.modalService.openLoginModal();
-
   }
 
   // Cierra el modal de Iniciar Sesión
@@ -67,6 +62,9 @@ export class NavbarComponent {
   logout() {
     localStorage.removeItem('tokenLogin');
     this.isLoggedIn = false;
+    setTimeout(() => {
+      this.router.navigate(['']);
+    }, 700);
   }
 
   onLogoutClick() {

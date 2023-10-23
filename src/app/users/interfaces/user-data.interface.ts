@@ -13,5 +13,6 @@ export interface UserData {
   userType:         string;
   phoneNumber:      string;
   address:          string;
+  profilePicture:   string;
   dateOfBirth:      Date;
 }

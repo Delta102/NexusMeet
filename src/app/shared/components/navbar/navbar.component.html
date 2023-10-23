@@ -64,7 +64,7 @@
           </li>
           <li *ngIf="isLoggedIn">
             <a
-              routerLink="/"
+              routerLink="user/profile"
               class="block py-2 pl-3 pr-4 text-xl text-white bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
               aria-current="page"
               >Mi perfil</a
@@ -93,23 +93,14 @@
 
           <li *ngIf="!isLoggedIn">
             <button
-              data-modal-target="loginModal"
-              data-modal-toggle="loginModal"
+              [routerLink]="'user/login'"
               class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
-              (click)="openLoginModal()"
+
               aria-current="page"
             >
               Iniciar Sesión
             </button>
-            <div
-              id="loginModal"
-              tabindex="-1"
-              aria-hidden="true"
-              class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50"
-              *ngIf="modalService.isLoginModalOpen"
-            >
-              <app-login></app-login>
-            </div>
+
           </li>
 
           <li *ngIf="!isLoggedIn">
@@ -131,7 +122,7 @@
               class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50"
               *ngIf="modalService.isRegisterModalOpen"
             >
-              <add-user></add-user>
+              <!--  -->
             </div>
           </li>
         </ul>

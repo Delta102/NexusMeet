@@ -6,12 +6,19 @@ import { DetailEventComponent } from './components/manage-events/detail-event/de
 
 const routes: Routes = [
   { path: 'add-event', component: AddEventComponent },
-  { path: 'manage-events/:userId', component: ManageEventsComponent,},
-  {path: 'detail-event/:eventId', component: DetailEventComponent},
+  { path: 'manage-events/:userId', component: ManageEventsComponent },
+  {
+    path: 'detail-event/:eventId',
+    component: DetailEventComponent,
+    children: [
+      { path: '', loadChildren: () => import('../entry/entry.module').then( m => m.EntryModule ), },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class EventsRoutingModule { }
+
+export class EventsRoutingModule {}

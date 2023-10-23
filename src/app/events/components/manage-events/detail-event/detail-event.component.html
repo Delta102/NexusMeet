@@ -17,6 +17,58 @@
               srcset=""
             />
           </div>
+
+          <hr class="w-1/2 md:w-full border-t border-slate-950 mt-4 mb-4" />
+
+          <div>
+            <div class="w-full h-auto">
+              <h2 class="text-center flex font-bold">Detalles:</h2>
+            </div>
+
+            <div class="w-full h-auto">
+              <h2 class="text-center flex justify-center items-center">
+                {{ event.description }}
+              </h2>
+            </div>
+          </div>
+
+          <div>
+            <div class="w-full h-auto">
+              <h2 class="text-center flex font-bold">Inicio del Evento:</h2>
+            </div>
+
+            <div class="w-full h-auto">
+              <h2 class="text-center flex justify-center items-center">
+                {{ event.dateEventStart | date : "dd" : "UTC" }}/{{
+                  event.dateEventStart | date : "MMM"
+                }}/{{ event.dateEventStart | date : "yyy" }}
+              </h2>
+
+              <h2 class="text-center flex justify-center items-center">
+                {{ event.dateEventStart | date : "HH" : "UTC" }}:{{
+                  event.dateEventStart | date : "m"
+                }}
+              </h2>
+            </div>
+          </div>
+
+          <hr class="w-1/2 md:w-full border-t border-slate-950 mt-4 mb-4" />
+
+          <div>
+            <div class="w-full h-auto">
+              <h2 class="text-center flex font-bold">
+                Entradas Disponibles: {{ event.capacity }}
+              </h2>
+            </div>
+          </div>
+
+          <div>
+            <div class="w-full h-auto">
+              <h2 class="text-center flex font-bold">
+                Precio de Entrada: {{ event.entryPrice }}
+              </h2>
+            </div>
+          </div>
         </div>
 
         <!-- Columna 2 -->
@@ -48,7 +100,10 @@
             </div>
 
             <div class="w-full lg:w-96 relative">
-              <div class="aspect-w-1 aspect-h-1 lg:aspect-none lg:w-96 h-96" style="max-width: 24rem;">
+              <div
+                class="aspect-w-1 aspect-h-1 lg:aspect-none lg:w-96 h-96"
+                style="max-width: 24rem"
+              >
                 <event-map
                   [latitude]="event.latitude"
                   [longitude]="event.longitude"
@@ -56,16 +111,26 @@
               </div>
             </div>
 
+            <hr class="w-1/2 md:w-full border-t border-slate-950 mt-4 mb-4" />
 
-            <!-- SUB COLUMNA DENTRO DEL ÚLTIMO ROW PARA LOS BOTONES -->
             <div class="flex flex-col md:flex-row space-y-4 md:space-y-0">
-              <div class="rounded p-2 text-center">
-                <button
-                  type="button"
-                  class="text-white bg-gradient-to-br from-blue-950 via-slate to-blue hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                >
-                  Comprar Entradas
-                </button>
+              <button
+                data-modal-target="buyModal"
+                data-modal-toggle="buyModal"
+                class="text-white bg-gradient-to-br from-blue-950 via-slate to-blue hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                (click)="openBuyModal()"
+                aria-current="page"
+              >
+                Comprar Entradas
+              </button>
+              <div
+                id="buyModal"
+                tabindex="-1"
+                aria-hidden="true"
+                class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50"
+                *ngIf="modalService.isBuyEntryModalOpen"
+              >
+                <entry-buy-entry [eventId]="event.id"></entry-buy-entry>
               </div>
 
               <div class="rounded p-2 text-center">
