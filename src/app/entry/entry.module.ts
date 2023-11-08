@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BuyEntryComponent } from './buy-entry/buy-entry.component';
 import { EntryRoutingModule } from './entry-routing.module';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     EntryRoutingModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   exports: [
     BuyEntryComponent

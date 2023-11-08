@@ -4,23 +4,104 @@
     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0">
       <!-- Columna 1 -->
       <div class="bg-gray-200 rounded-lg p-4 h-full">
-        <div class="w-full h-auto">
-          <img src="assets/images/logo/full_logo_black.png" alt="image_profile" srcset="" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="w-full h-auto bg-white rounded-lg p-4">
+            <div class="flex justify-center items-center">
+              <img
+                [src]="'http://127.0.0.1:8000/' + userData!.profilePicture"
+                (load)="onLoad()"
+                alt="image_profile"
+                [ngStyle]="{ display: hasLoaded ? '' : 'none' }"
+                class="object-cover rounded-full w-48 h-48"
+              />
+            </div>
+
+            <img
+              *ngIf="!hasLoaded"
+              src="assets/images/default_profile_picture.png"
+            />
+            <div
+              class="flex justify-center items-center space-y-4 md:space-y-0"
+            >
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="w-full h-auto rounded-lg p-4">
+                  <button
+                    class="text-white bg-gradient-to-br from-blue-800 via-slate to-blue-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    routerLink="edit"
+                    routerLinkActive="active"
+                  >
+                    Editar Perfil
+                  </button>
+
+                  <button
+                    *ngIf="isPromotor"
+                    class="text-white bg-gradient-to-br from-blue-800 via-slate to-blue-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    [routerLink]="'manage-events/' + userData!.id"
+                    routerLinkActive="active"
+                  >
+                    Gestionar Eventos
+                  </button>
+                  <button
+                    class="text-white bg-gradient-to-br from-blue-800 via-slate to-blue-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    [routerLink]="'entrys/' + userData!.id"
+                    routerLinkActive="active"
+                  >
+                    Historial de Compras
+                  </button>
+
+                  <button
+                    class="text-white bg-gradient-to-br from-red-600 via-slate to-red-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    routerLink=""
+                    routerLinkActive="active"
+                  >
+                    Regresar
+                  </button>
+                </div>
+                <!-- <div class="w-full h-auto rounded-lg p-4"></div> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Subcolumna 2 -->
+          <div class="w-full h-auto bg-white rounded-lg p-4">
+            <div class="text-center">
+              <p class="font-bold text-center">
+                {{ userData!.firstName | titlecase }}
+              </p>
+            </div>
+
+            <p class="text-start font-bold">Tipo de Usuario:</p>
+            <div class="text-center">
+              {{ userData!.userType }}
+            </div>
+
+            <p class="text-start font-bold">Número de teléfono:</p>
+            <div class="text-center">
+              <div *ngIf="userData!.phoneNumber != ' '">
+                <h1>No se agregó ningún número de teléfono</h1>
+              </div>
+              <div *ngIf="userData!.phoneNumber">
+                {{ userData!.phoneNumber }}
+              </div>
+            </div>
+
+            <p class="text-start font-bold">Fecha de Nacimiento:</p>
+            <div class="text-center">
+              {{ userData!.dateOfBirth | date : "dd/mm/yyyy" : "UTC" }}
+            </div>
+
+            <p class="text-start font-bold">Email:</p>
+            <div class="text-center">
+              {{ userData!.email }}
+            </div>
+          </div>
         </div>
-
-        
-
-
       </div>
     </div>
   </div>
 
   <!-- Columna 2 -->
   <div class="md:w-1/2 bg-gray-300 rounded-lg p-4">
-    <div
-      class="flex flex-col h-full items-center justify-center p-4 border-b rounded-t dark:border-gray-600"
-    >
-      <h1>Profile Works!</h1>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

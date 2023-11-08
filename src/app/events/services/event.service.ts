@@ -3,7 +3,7 @@ import { EventData } from '../interfaces/event-data.interface';
 import { EventDataSource } from '../datasources/event.datasource';
 import { apiConfig } from 'src/app/config/api-config';
 import { Observable, map } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments';
 
@@ -65,12 +65,40 @@ export class EventService {
     );
   }
 
-  async getEventsByUser(userId: number): Promise<EventData[]> {
-    return await this.eventsDataSource.getEventosByUser(userId);
+  getEventsByUser(userId: number): Observable<EventData[]> {
+    return this.http.get<any[]>(`${this.apiUrl}events-by-user/${userId}`).pipe(
+      map(response => {
+        return response.map(event => {
+          return {
+            id: event.id,
+            dateEventStart: new Date(event.date_event_start),
+            eventName: event.event_name,
+            eventImage: event.event_image,
+            description: event.description,
+            latitude: event.latitude,
+            longitude: event.longitude,
+            capacity: event.capacity,
+            entryPrice: event.entry_price,
+            entryType: event.entry_type,
+            userId: event.user_id
+          };
+        });
+      })
+    );
   }
 
   addEvent(formData: FormData) {
-    return this.http.post(this.apiUrl + 'events/create/', formData);
+
+    console.log(formData);
+
+
+    const token = localStorage.getItem('tokenJWT');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    })
+
+    return this.http.post(this.apiUrl + 'events/create/', formData, { headers });
   }
 
   deleteEvent(eventId: number): Observable<any>{

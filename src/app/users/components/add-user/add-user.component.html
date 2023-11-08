@@ -40,6 +40,23 @@
     <div class="p-6 space-y-6">
       <div class="relative z-0 w-full mb-6 group">
         <input
+          [(ngModel)]="userData.dateOfBirth"
+          type="datetime-local"
+          name="dateOfBirth"
+          id="floating_date"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+          required
+        />
+        <label
+          for="floating_date"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Fecha de Nacimiento:
+        </label>
+      </div>
+
+      <div class="relative z-0 w-full mb-6 group">
+        <input
           [(ngModel)]="userData.email"
           type="email"
           name="email"
@@ -85,17 +102,76 @@
         >
       </div>
     </div>
+
+    <div class="relative z-0 w-full mb-6 group">
+      <label
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        for="user_avatar"
+        >Imagen de Perfil</label
+      >
+      <input
+        [(ngModel)]="userData.profilePicture"
+        (change)="onFileSelected($event)"
+        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        aria-describedby="user_avatar_help"
+        id="profilePicture"
+        name="profilePicture"
+        type="file"
+      />
+    </div>
+
+    <div class="inline-flex items-center justify-center">
+      <label
+        class="relative flex items-center p-3 rounded-full cursor-pointer"
+        for="promotor-checkbox"
+        data-ripple-dark="true"
+      >
+        <input
+          [(ngModel)]="userData.userType"
+          name="userType"
+          type="checkbox"
+          class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-950 checked:bg-blue-950 checked:before:bg-blue-950 hover:before:opacity-10"
+          id="promotor-checkbox"
+          checked
+        />
+        <div
+          class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-3.5 w-3.5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            stroke="currentColor"
+            stroke-width="1"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </div>
+        &nbsp; Promotor
+      </label>
+    </div>
+    <div
+      *ngIf="message"
+      class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+      role="alert"
+    >
+      >{{ message }}
+    </div>
+
+    <div
+      *ngIf="errorMessage"
+      class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+      role="alert"
+    >
+      >{{ errorMessage }}
+    </div>
   </div>
-  <div class="flex items-center space-x-2">
-    <input
-      type="checkbox"
-      [(ngModel)]="userData.userType"
-      name="userType"
-      id="userType"
-      class="text-blue-600 peer dark:text-blue-500 focus:ring-blue-300 dark:focus:ring-blue-600"
-    />
-    <label for="userType" class="text-gray-900 dark:text-white">Promotor</label>
-  </div>
+
   <!-- Modal footer -->
   <div
     class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600"

@@ -13,6 +13,8 @@ import { ModalCommunicationService } from 'src/app/events/services/visualservice
 export class DetailEventComponent implements OnInit{
 
   eventId!: number;
+  message: string = '';
+  showButton: boolean = true;
   event!: EventData;
   showShop: boolean = false;
 
@@ -26,7 +28,13 @@ export class DetailEventComponent implements OnInit{
     this.showShop = false;
     this.eventService.getEvent(this.eventId).subscribe((data: EventData) => {
       this.event = data;
-      console.log(this.event);
+      if( this.event.capacity <= 0){
+        this.message = 'Ya no hay entradas disponibles para este evento!!';
+        this.showButton = false;
+      }
+      else{
+        this.message = this.event.capacity.toString();
+      }
     });
   }
 

@@ -19,25 +19,20 @@ export class LoginComponent {
   constructor(private userService: UserService, private modalService: ModalCommunicationService, private router: Router) {}
 
   closeModal() {
-    this.modalService.closeLoginModal(); // Cierra el modal
+    this.modalService.closeLoginModal();
   }
 
 
-  async onSubmit() {
-    this.userService.login(this.username, this.password).subscribe(
-      (response) => {
-        // Manejar el inicio de sesión exitoso
-        console.log('Inicio de sesión exitoso', response);
+  onSubmit() {
+    this.userService.login(this.username, this.password).subscribe((success: boolean) => {
+      if (success) {
         this.message = 'Inicio de sesión exitoso';
-
         setTimeout(() => {
           this.router.navigate(['']);
-        }, 700);
-      },
-      (error) => {
-        console.error('Error de inicio de sesión', error);
-        this.errorMessage = 'Credenciales inválidas';
+        }, 1200);
+      } else {
+        this.errorMessage = 'Error en el inicio de sesión';
       }
-    );
+    });
   }
 }

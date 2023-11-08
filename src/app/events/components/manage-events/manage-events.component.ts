@@ -14,7 +14,7 @@ import { EventData } from '../../interfaces/event-data.interface';
 export class ManageEventsComponent {
   logoBlack = '/assets/images/logo/full_logo_black.png';
 
-  eventos: EventData[] = [];
+  eventData: EventData[] = [];
   isLoggedIn = false;
   isPromotor = false;
   userData!: any;
@@ -31,13 +31,13 @@ export class ManageEventsComponent {
         (userData) => {
           this.userData = userData;
           this.isLoggedIn = userData !== null;
-          if (userData && userData['user_type']) {
-            console.log(userData['user_type']);
+          if (userData && userData['userType']) {
+            console.log(userData['userType']);
           } else {
             console.log("userData o userData.user_type es nulo");
           }
 
-          this.isPromotor =userData['user_type'] === 'Promotor';
+          this.isPromotor =userData!['userType'] === 'Promotor';
         },
         (error) => {
           console.error('Error al obtener el usuario actual', error);
@@ -51,14 +51,15 @@ export class ManageEventsComponent {
           console.log(this.userData);
 
           // Luego, aquí puedes llamar al servicio de eventos con userId
-          this.eventService.getEventsByUser(userId)
-            .then(eventos => {
-              this.eventos = eventos;
-              console.log(eventos);
-            })
-            .catch(error => {
-              console.error('Error al obtener eventos del usuario:', error);
-            });
+          this.eventService.getEventsByUser(userId).subscribe(
+            (data: EventData[]) => {
+              this.eventData = data;
+            },
+            (error) => {
+              console.error('Error al obtener los eventos: ', error);
+
+            }
+          )
         } catch (error) {
           console.error('Error al obtener el usuario:', error);
         }

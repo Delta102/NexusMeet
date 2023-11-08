@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalCommunicationService } from 'src/app/events/services/visualservices/modal-comunication.service';
 import { UserService } from '../../services/user.service';
 import { UserData } from '../../interfaces/user-data.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'add-user',
@@ -9,10 +10,13 @@ import { UserData } from '../../interfaces/user-data.interface';
 })
 export class AddUserComponent {
 
-  constructor(public modalService: ModalCommunicationService, private userService: UserService) {}
+  message:string = '';
+  errorMessage: string = '';
+
+  constructor(public modalService: ModalCommunicationService, private userService: UserService, private router: Router) {};
 
   closeModal() {
-    this.modalService.closeRegisterModal(); // Cierra el modal
+    this.modalService.closeRegisterModal();
   }
 
   userData: UserData = {
@@ -34,31 +38,56 @@ export class AddUserComponent {
     profilePicture: ''
   };
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    console.log('Archivo seleccionado:', file['name']); // Verifica si el archivo se selecciona correctamente
+    this.userData.profilePicture = file;
+    console.log('Archivo seleccionado:', this.userData.profilePicture);
+  }
+
+
   onSubmit() {
     this.userData.username = this.userData.email;
 
-    const userPromotorData = {
-      id: this.userData.id,
-      password: this.userData.password,
-      last_login: this.userData.lastLogin,
-      username: this.userData.username,
-      first_name: this.userData.firstName,
-      last_name: this.userData.lastName,
-      is_staff: false,
-      email: this.userData.email,
-      phone_number: this.userData.phoneNumber,
-      user_type: this.userData.userType ? 'Promotor' : 'Usuario',
-      address: this.userData.address,
-      date_of_birth: this.userData.dateOfBirth,
-      is_active: true,
-      profile_picture: this.userData.profilePicture
-    };
+    //const formattedDate = this.userData.lastLogin.toString();
+    const dateOfBirth = new Date(this.userData.dateOfBirth);
+    const formattedDateBirth = `${dateOfBirth.getFullYear()}-${(dateOfBirth.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${dateOfBirth.getDate().toString().padStart(2, '0')}`;
 
-    console.log(userPromotorData);
+    const userPromotorData = new FormData();
+
+    userPromotorData.append('id', this.userData.id.toString());
+    userPromotorData.append('password', this.userData.password);
+    //userPromotorData.append('last_login', formattedDate);
+    userPromotorData.append('username', this.userData.username);
+    userPromotorData.append('first_name', this.userData.firstName);
+    userPromotorData.append('last_name', this.userData.lastName);
+    userPromotorData.append('is_staff', 'false');
+    userPromotorData.append('email', this.userData.email);
+    userPromotorData.append('phone_number', this.userData.phoneNumber);
+    userPromotorData.append('user_type', this.userData.userType ? 'Promotor' : 'Usuario');
+    userPromotorData.append('address', this.userData.address);
+    userPromotorData.append('date_of_birth', formattedDateBirth);
+    userPromotorData.append('profile_picture', this.userData.profilePicture);
+    userPromotorData.append('is_active', 'true');
 
     this.userService.addUser(userPromotorData).subscribe((response: any) => {
-      window.location.reload();
+
       console.log('Usuario creado con éxito', response);
-    });
+      this.message = 'Usuario creado con éxito';
+
+      setTimeout(() =>{
+        this.router.navigate(['']);
+      }, 5000);
+
+      window.location.reload();
+    },
+    (error) => {
+      console.log('Error', error);
+      this.errorMessage = error;
+    }
+
+    );
   }
 }

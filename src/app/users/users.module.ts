@@ -8,6 +8,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { UserMainComponent } from './components/user-main/user-main.component';
+import { EditUserComponent } from './components/profile/edit-user/edit-user.component';
+import { EventsModule } from '../events/events.module';
+import { EntryByUserComponent } from './components/profile/entry-by-user/entry-by-user.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,14 @@ import { UserMainComponent } from './components/user-main/user-main.component';
     EventsByUserComponent,
     ProfileComponent,
     UserMainComponent,
+    EditUserComponent,
+    EntryByUserComponent,
   ],
 
   imports: [
     FormsModule,
     UsersRoutingModule,
+    EventsModule,
     SharedModule,
     CommonModule,
   ],

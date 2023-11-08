@@ -21,19 +21,21 @@ export class NavbarComponent {
   ) {
   }
 
-  async ngOnInit(): Promise<void> {
 
+
+  ngOnInit() {
     this.userService.getCurrentUser().subscribe(
       (userData) => {
         this.userData = userData;
         this.isLoggedIn = userData !== null;
-        if (userData && userData['user_type']) {
-          console.log(userData['user_type']);
+
+        if (userData && userData['userType']) {
+          console.log(userData['userType']);
         } else {
           console.log("userData o userData.user_type es nulo");
         }
 
-        this.isPromotor =userData['user_type'] === 'Promotor';
+        this.isPromotor =userData!['userType'] === 'Promotor';
       },
       (error) => {
         console.error('Error al obtener el usuario actual', error);
@@ -60,7 +62,8 @@ export class NavbarComponent {
   }
 
   logout() {
-    localStorage.removeItem('tokenLogin');
+    this.userService.logout();
+    localStorage.removeItem('tokenJWT');
     this.isLoggedIn = false;
     setTimeout(() => {
       this.router.navigate(['']);
@@ -68,15 +71,6 @@ export class NavbarComponent {
   }
 
   onLogoutClick() {
-    this.userService.logout().subscribe(
-      () => {
-        // Realizar acciones adicionales después del logout si es necesario
-        console.log('Logout exitoso');
-        // Redirigir al usuario a la página de inicio o a otra página deseada
-      },
-      (error) => {
-        console.error('Error al hacer logout', error);
-      }
-    );
+    this.userService.logout();
   }
 }

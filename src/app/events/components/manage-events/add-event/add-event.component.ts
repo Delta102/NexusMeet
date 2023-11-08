@@ -1,21 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ModalCommunicationService } from '../../../services/visualservices/modal-comunication.service';
 import { EventData } from '../../../interfaces/event-data.interface';
 import { EventService } from '../../../services/event.service';
+import * as mapboxgl from 'mapbox-gl';
+import { environment } from 'src/environments';
 
 @Component({
   selector: 'add-event',
   templateUrl: './add-event.component.html',
 })
-export class AddEventComponent {
+export class AddEventComponent  implements OnInit{
   @Input() userId!: number;
+
+  mapbox = (mapboxgl as typeof mapboxgl);
+
+  selectedLocation: { latitude: number, longitude: number } = { latitude: 0, longitude: 0 };
+
   constructor(public modalService: ModalCommunicationService, private eventService: EventService) {}
-
-
-
-  closeModal() {
-    this.modalService.closeRegisterEventModal(); // Cierra el modal
-  }
 
   eventData: EventData = {
     id: 0,
@@ -31,6 +32,51 @@ export class AddEventComponent {
     entryType: ''
   };
 
+  ngOnInit() {
+    if (this.mapbox && this.selectedLocation)
+      this.initMap();
+  }
+
+  closeModal() {
+    this.modalService.closeRegisterEventModal();
+  }
+
+  initMap() {
+    this.mapbox.accessToken = environment.mapBoxToken;
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-78.5002700, -7.1637800],
+      zoom: 12
+    });
+
+    // Agrega un control de navegación (opcional)
+    map.addControl(new mapboxgl.NavigationControl());
+
+    let marker: any = null;
+
+    map.on('click', (e) => {
+
+      const lngLat = e.lngLat;
+
+
+      if(marker){
+        marker.setLngLat(lngLat);
+      }else{
+        marker = new mapboxgl.Marker()
+          .setLngLat(lngLat)
+          .addTo(map);
+      }
+
+      this.eventData.latitude = lngLat.lat;
+      this.eventData.longitude = lngLat.lng;
+    });
+  }
+
+
+
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
     console.log('Archivo seleccionado:', file); // Verifica si el archivo se selecciona correctamente
@@ -38,6 +84,7 @@ export class AddEventComponent {
   }
 
   onSubmit() {
+
     console.log('Datos a enviar:', this.eventData);
     const formData = new FormData();
 
@@ -47,11 +94,14 @@ export class AddEventComponent {
     formData.append('event_name', this.eventData.eventName);
     formData.append('event_image', this.eventData.eventImage);
     formData.append('description', this.eventData.description);
-    formData.append('capacity', this.eventData.capacity.toString()); // Convierte a cadena
-    formData.append('entry_price', this.eventData.entryPrice.toString()); // Convierte a cadena
-    formData.append('creator', this.userId.toString()); // Convierte a cadena
-
-    console.log('asdf'+formData);
+    formData.append('capacity', this.eventData.capacity.toString());
+    formData.append('entry_price', this.eventData.entryPrice.toString());
+    formData.append('entry_type', this.eventData.entryType.toString());
+    formData.append('latitude', this.eventData.latitude.toString());
+    formData.append('longitude', this.eventData.longitude.toString());
+    // formData.append('entry_type', this.eventData.entryType.toString());
+    formData.append('entry_type', 'General');
+    formData.append('creator', this.userId.toString());
 
 
     this.eventService.addEvent(formData).subscribe((response: any) => {

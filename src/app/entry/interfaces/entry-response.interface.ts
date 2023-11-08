@@ -4,4 +4,6 @@ export interface EntryResponse {
   priceTotal:       number;
   userId:           number;
   eventId:          number;
+  qr:               string;
+  eventName:        string;
 }

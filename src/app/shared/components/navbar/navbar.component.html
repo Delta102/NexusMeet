@@ -70,16 +70,6 @@
               >Mi perfil</a
             >
           </li>
-          <li *ngIf="isLoggedIn && isPromotor">
-            <button
-
-              class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
-              aria-current="page"
-              [routerLink]="['events/manage-events', userData['id']]"
-            >
-              Gestionar de Eventos
-            </button>
-          </li>
 
           <li *ngIf="isLoggedIn">
             <button
@@ -105,10 +95,8 @@
 
           <li *ngIf="!isLoggedIn">
             <button
-              data-modal-target="loginModal"
-              data-modal-toggle="loginModal"
+              [routerLink]="'user/register'"
               class="block py-2 pl-3 pr-4 text-white text-xl bg-white-700 rounded md:bg-transparent md:text-white-50 md:p-0 dark:text-white md:dark:text-blue-500"
-              (click)="openRegisterModal()"
               aria-current="page"
             >
               Registrar Usuario

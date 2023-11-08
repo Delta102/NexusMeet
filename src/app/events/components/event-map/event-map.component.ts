@@ -16,6 +16,8 @@ export class EventMapComponent {
   constructor(private map: MapService) { }
 
   ngOnInit() {
+    console.log(this.latitude, this.longitude);
+
     this.map.buildMap(this.longitude, this.latitude);
   }
 }
