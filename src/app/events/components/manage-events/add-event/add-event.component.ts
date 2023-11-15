@@ -105,8 +105,8 @@ export class AddEventComponent  implements OnInit{
 
 
     this.eventService.addEvent(formData).subscribe((response: any) => {
-      // Manejar la respuesta de la API aquí (por ejemplo, mostrar un mensaje de éxito)
       console.log('Evento creado con éxito', response);
+      window.location.reload();
     });
   }
 }
