@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { QrComponent } from './qr/qr.component';
+import { AssistantComponent } from './assistant/assistant.component';
 
 @NgModule({
   declarations: [
     BuyEntryComponent,
     QrComponent,
+    AssistantComponent,
   ],
   imports: [
     EntryRoutingModule,
@@ -18,7 +20,9 @@ import { QrComponent } from './qr/qr.component';
     CommonModule
   ],
   exports: [
-    BuyEntryComponent
+    BuyEntryComponent,
+    AssistantComponent,
+    QrComponent
   ],
   providers: [],
 })

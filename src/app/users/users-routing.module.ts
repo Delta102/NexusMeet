@@ -8,6 +8,7 @@ import { ManageEventsComponent } from '../events/components/manage-events/manage
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { EntryByUserComponent } from './components/profile/entry-by-user/entry-by-user.component';
 import { QrComponent } from '../entry/qr/qr.component';
+import { AssistantComponent } from '../entry/assistant/assistant.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
             path: 'manage-events/:userId',
             component: ManageEventsComponent,
             children: [
-              { path: 'qr', component: QrComponent }
+              // { path: 'qr', component: QrComponent },
+              { path: 'assistant/:eventId', component: AssistantComponent }
             ],
           },
           { path: 'entrys/:userId', component: EntryByUserComponent },

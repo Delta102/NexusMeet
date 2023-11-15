@@ -141,6 +141,14 @@ export class ManageEventsComponent {
     this.modalService.openRegisterEventModal();
   }
 
+  openAssistentModal() {
+    this.modalService.openAssistantEventModal();
+  }
+
+  openAttendeeModal(){
+    this.modalService.openAttendeeEventModal();
+  }
+
   // Cierra el modal de Iniciar Sesión
   closeRegisterModal() {
     this.modalService.closeRegisterEventModal();

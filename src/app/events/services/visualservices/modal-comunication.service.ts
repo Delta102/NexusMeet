@@ -6,6 +6,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ModalCommunicationService {
   public isLoginModalOpen = false;
+  public isAssistantModalOpen = false;
+  public isAttendeeModalOpen = false;
   public isRegisterModalOpen = false;
   public isRegisterEventModalOpen = false;
   public isUpdateEventModalOpen = false;
@@ -34,6 +36,22 @@ export class ModalCommunicationService {
 
   closeRegisterModal() {
     this.isRegisterModalOpen = false;
+  }
+
+  openAssistantEventModal() {
+    this.isAssistantModalOpen = true;
+  }
+
+  closeAssistantEventModal() {
+    this.isAssistantModalOpen = false;
+  }
+
+  openAttendeeEventModal() {
+    this.isAttendeeModalOpen = true;
+  }
+
+  closeAttendeeModal() {
+    this.isAttendeeModalOpen = false;
   }
 
   openRegisterEventModal() {
