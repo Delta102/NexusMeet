@@ -4,7 +4,7 @@
   >
     <div class="content-div">
       <img
-        [src]="'http://127.0.0.1:8000/' + event.eventImage"
+        [src]="'https://nm-service.onrender.com' + event.eventImage"
         alt="event.eventImage"
         (load)="onLoad()"
         [ngStyle]="{ display: hasLoaded ? '' : 'none' }"

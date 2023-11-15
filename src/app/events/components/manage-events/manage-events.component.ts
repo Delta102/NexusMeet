@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserData } from 'src/app/users/interfaces/user-data.interface';
 import { UserService } from 'src/app/users/services/user.service';
 import { ModalCommunicationService } from '../../services/visualservices/modal-comunication.service';
 import { EventService } from '../../services/event.service';
 import { EventData } from '../../interfaces/event-data.interface';
+import { DatePipe } from '@angular/common';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-manage-events',
   templateUrl: './manage-events.component.html',
-  styleUrls: ['./manage-events.component.css']
+  styleUrls: ['./manage-events.component.css'],
+  providers: [DatePipe]
 })
 export class ManageEventsComponent {
   logoBlack = '/assets/images/logo/full_logo_black.png';
@@ -18,14 +20,21 @@ export class ManageEventsComponent {
   isLoggedIn = false;
   isPromotor = false;
   userData!: any;
+  selectedFilter = 'todos';
+  // isEventsToStartOpen = false;
+  // isUpcomingEventsOpen = false;
+  // isPastEventsOpen = false;
+  eventsToStart: EventData[] = [];
+  upcomingEvents: EventData[] = [];
+  pastEvents: EventData[] = [];
 
-  constructor(private route: ActivatedRoute, private userService: UserService, public modalService: ModalCommunicationService, private eventService: EventService) {}
+  constructor(private route: ActivatedRoute, private userService: UserService, public modalService: ModalCommunicationService, private eventService: EventService, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     let userId: number;
 
     this.route.params.subscribe(async (params) => {
-      userId = +params['userId']; // Convierte el parámetro userId a un número
+      userId = +params['userId'];
 
       this.userService.getCurrentUser().subscribe(
         (userData) => {
@@ -45,15 +54,12 @@ export class ManageEventsComponent {
       );
 
       if (!isNaN(userId)) {
-        // Verifica que userId sea un número válido
         try {
           this.userData = await this.userService.getUser(userId); // Llama al servicio para obtener los datos del usuario
-          console.log(this.userData);
-
-          // Luego, aquí puedes llamar al servicio de eventos con userId
           this.eventService.getEventsByUser(userId).subscribe(
             (data: EventData[]) => {
               this.eventData = data;
+              this.filteredEvents();
             },
             (error) => {
               console.error('Error al obtener los eventos: ', error);
@@ -67,6 +73,56 @@ export class ManageEventsComponent {
     });
   }
 
+  formatFecha(fecha: string): string {
+    const fechaDate = new Date(fecha);
+    return formatDate(fechaDate, 'yyyy-MM-dd HH:mm:ss', 'en-US', 'GMT-0');
+  }
+
+
+  filteredEvents(){
+    const currentDate = new Date();
+    const nextDate = new Date(currentDate.getTime() + 10 * 60000);
+
+    const formatDate = (date: any, format: any, locale: any, timeZone: any) => {
+      return new Intl.DateTimeFormat(locale, {
+        timeZone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      }).format(date);
+    };
+
+    this.eventData.forEach((event) => {
+
+      const formattedDate = formatDate(
+        event.dateEventStart,
+        'yyyy-MM-dd HH:mm:ss',
+        'en-US',
+        'GMT-0'
+      );
+
+      event.dateEventStart = new Date(formattedDate);
+
+      console.log(event.dateEventStart);
+
+
+      if ( event.dateEventStart < currentDate ){
+        this.pastEvents.push(event);
+      }
+      if( event.dateEventStart > currentDate && event.dateEventStart <= nextDate ){
+        this.eventsToStart.push(event);
+      }
+      if( event.dateEventStart > nextDate ){
+        this.upcomingEvents.push(event);
+      }
+    });
+
+  };
+
   deleteEvent(eventId: number): void{
     this.eventService.deleteEvent(eventId)
     .subscribe(
@@ -78,7 +134,8 @@ export class ManageEventsComponent {
         console.error('Error al eliminar el evento: ', error);
       }
     )
-  }
+  };
+
 
   openRegisterModal() {
     this.modalService.openRegisterEventModal();
@@ -106,7 +163,5 @@ export class ManageEventsComponent {
   closeDeleteModal() {
     this.modalService.closeDeleteEventModal();
   }
-
-
 
 }

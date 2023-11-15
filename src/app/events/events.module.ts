@@ -1,3 +1,4 @@
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +14,6 @@ import { EventCardImageComponent } from './components/event-card-image/event-car
 import { DetailEventComponent } from './components/manage-events/detail-event/detail-event.component';
 import { EventMapComponent } from './components/event-map/event-map.component';
 import { EntryModule } from '../entry/entry.module';
-
-
 @NgModule({
   declarations: [
     ListComponent,
@@ -24,7 +23,7 @@ import { EntryModule } from '../entry/entry.module';
     DeleteEventComponent,
     EventCardImageComponent,
     DetailEventComponent,
-    EventMapComponent
+    EventMapComponent,
   ],
 
   imports: [

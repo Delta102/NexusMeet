@@ -8,7 +8,7 @@
           <div class="w-full h-auto bg-white rounded-lg p-4">
             <div class="flex justify-center items-center">
               <img
-                [src]="'http://127.0.0.1:8000/' + userData!.profilePicture"
+                [src]="'https://nm-service.onrender.com' + userData!.profilePicture"
                 (load)="onLoad()"
                 alt="image_profile"
                 [ngStyle]="{ display: hasLoaded ? '' : 'none' }"

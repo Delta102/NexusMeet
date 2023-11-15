@@ -7,6 +7,7 @@ import { EditUserComponent } from './components/profile/edit-user/edit-user.comp
 import { ManageEventsComponent } from '../events/components/manage-events/manage-events.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { EntryByUserComponent } from './components/profile/entry-by-user/entry-by-user.component';
+import { QrComponent } from '../entry/qr/qr.component';
 
 const routes: Routes = [
   {
@@ -20,8 +21,14 @@ const routes: Routes = [
         component: ProfileComponent,
         children: [
           { path: 'edit', component: EditUserComponent },
-          { path: 'manage-events/:userId', component: ManageEventsComponent },
-          { path: 'entrys/:userId', component: EntryByUserComponent }
+          {
+            path: 'manage-events/:userId',
+            component: ManageEventsComponent,
+            children: [
+              { path: 'qr', component: QrComponent }
+            ],
+          },
+          { path: 'entrys/:userId', component: EntryByUserComponent },
         ],
       },
     ],

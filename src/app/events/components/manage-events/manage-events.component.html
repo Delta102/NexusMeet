@@ -52,26 +52,141 @@
           </div>
         </div>
 
+        <h1><b Por Iniciarb> Eventos Por Iniciar </b></h1>
+
         <div
-          *ngFor="let event of eventData"
+          *ngFor="let event of eventsToStart"
           class="flex items-center justify-between border-b border-gray-300 py-2"
         >
           <div class="flex items-center space-x-4">
             <div class="w-20 bg-gray-200 rounded-full">
               <img
-                [src]="'http://127.0.0.1:8000' + event.eventImage"
+                [src]="'https://nm-service.onrender.com' + event.eventImage"
                 alt=""
                 srcset=""
                 class="object-cover rounded-full"
               />
             </div>
-            <div>
-              <h3 class="text-lg font-semibold">
-                {{ event.eventName }}
-              </h3>
-              <p class="text-gray-600">Descripcion: {{ event.description }}</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold">
+              {{ event.eventName }}
+            </h3>
+            <p class="text-gray-600">Entradas: S/.{{ event.entryPrice }}</p>
+          </div>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <div class="md:flex items-center">
+            <p class="text-lg font-semibold md:mr-2 text-center">
+              {{ event.dateEventStart | date : "d/M/yyyy" }}
+              {{ event.dateEventStart | date : "HH:mm" }}
+            </p>
+            <p class="text-lg font-semibold hidden md:block">&nbsp;</p>
+
+            <button class="text-white bg-gradient-to-br from-blue-600 via-slate to-blue-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
+            routerLink="qr"
+            >
+              Asistencia
+            </button>
+
+            <router-outlet></router-outlet>
+
+
+            <button
+            *ngIf="isPromotor"
+            class="text-white bg-gradient-to-br from-blue-800 via-slate to-blue-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            [routerLink]="'manage-events/' + userData!.id"
+            routerLinkActive="active"
+          >
+            Gestionar Eventos
+          </button>
+            <p class="text-lg font-semibold hidden md:block">&nbsp;&nbsp;</p>
+            <button
+              class="text-white bg-gradient-to-br from-green-600 via-blue to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
+              (click)="deleteEvent(event.id)"
+            >
+              Editar
+            </button>
+            <p class="text-lg font-semibold hidden md:block">&nbsp;&nbsp;</p>
+            <button
+              class="text-white bg-gradient-to-br from-red-600 via-slate to-red-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
+              (click)="deleteEvent(event.id)"
+            >
+              Eliminar
+            </button>
+            <p class="text-lg font-semibold hidden md:block">&nbsp;&nbsp;</p>
+          </div>
+        </div>
+        <hr />
+        <h1><b> Eventos Futuros </b></h1>
+
+        <div
+          *ngFor="let event of upcomingEvents"
+          class="flex items-center justify-between border-b border-gray-300 py-2"
+        >
+          <div class="flex items-center space-x-4">
+            <div class="w-20 bg-gray-200 rounded-full">
+              <img
+                [src]="'https://nm-service.onrender.com' + event.eventImage"
+                alt=""
+                srcset=""
+                class="object-cover rounded-full"
+              />
             </div>
           </div>
+          <div>
+            <h3 class="text-lg font-semibold">
+              {{ event.eventName }}
+            </h3>
+            <p class="text-gray-600">Entradas: S/.{{ event.entryPrice }}</p>
+          </div>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <div class="md:flex items-center">
+            <p class="text-lg font-semibold md:mr-2 text-center">
+              {{ event.dateEventStart | date : "d/M/yyyy" }}
+              {{ event.dateEventStart | date : "HH:mm" }}
+            </p>
+
+            <p class="text-lg font-semibold hidden md:block">&nbsp;&nbsp;</p>
+            <button
+              class="text-white bg-gradient-to-br from-green-600 via-blue to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
+              (click)="deleteEvent(event.id)"
+            >
+              Editar
+            </button>
+            <p class="text-lg font-semibold hidden md:block">&nbsp;&nbsp;</p>
+            <button
+              class="text-white bg-gradient-to-br from-red-600 via-slate to-red-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
+              (click)="deleteEvent(event.id)"
+            >
+              Eliminar
+            </button>
+            <p class="text-lg font-semibold hidden md:block">&nbsp;&nbsp;</p>
+          </div>
+        </div>
+        <hr />
+        <h1><b> Eventos Pasados </b></h1>
+
+        <div
+          *ngFor="let event of pastEvents"
+          class="flex items-center justify-between border-b border-gray-300 py-2"
+        >
+          <div class="flex items-center space-x-4">
+            <div class="w-20 bg-gray-200 rounded-full">
+              <img
+                [src]="'https://nm-service.onrender.com' + event.eventImage"
+                alt=""
+                srcset=""
+                class="object-cover rounded-full"
+              />
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold">
+              {{ event.eventName }}
+            </h3>
+            <p class="text-gray-600">Entradas: S/.{{ event.entryPrice }}</p>
+          </div>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <div class="md:flex items-center">
             <p class="text-lg font-semibold md:mr-2 text-center">
               {{ event.dateEventStart | date : "d/M/yyyy" }}
@@ -82,7 +197,7 @@
               class="text-white bg-gradient-to-br from-blue-600 via-slate to-blue-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
               (click)="deleteEvent(event.id)"
             >
-              Asistencia
+              Listado de Asistencia
             </button>
             <p class="text-lg font-semibold hidden md:block">&nbsp;&nbsp;</p>
             <button
@@ -101,6 +216,7 @@
             <p class="text-lg font-semibold hidden md:block">&nbsp;&nbsp;</p>
           </div>
         </div>
+        <hr />
       </div>
     </div>
   </div>
