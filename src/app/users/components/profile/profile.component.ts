@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UserData } from '../../interfaces/user-data.interface';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styles: [],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
   userData!: UserData | null;
   isLoggedIn: boolean = false;
   hasLoaded: boolean = false;
   isPromotor: boolean = false;
+  showImage: boolean = true;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.userService.getCurrentUser().subscribe(
       (userData) => {
         this.userData = userData;
@@ -30,6 +32,16 @@ export class ProfileComponent {
         console.error('Error al obtener el usuario actual', error);
       }
     );
+  }
+
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showImage = this.router.url === 'user/profile';
+        console.log(this.showImage);
+        
+      }
+    });
   }
 
   onLoad() {

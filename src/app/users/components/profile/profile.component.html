@@ -38,7 +38,7 @@
                     class="text-white bg-gradient-to-br from-blue-800 via-slate to-blue-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                     [routerLink]="'manage-events/' + userData!.id"
                     routerLinkActive="active"
-                  >
+                  > 
                     Gestionar Eventos
                   </button>
                   <button
@@ -102,6 +102,7 @@
 
   <!-- Columna 2 -->
   <div class="md:w-1/2 bg-gray-300 rounded-lg p-4">
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="!showImage"></router-outlet>
+    <img src="assets/images/logo/logo_black.png" alt="Nexus Meet Logo" *ngIf="showImage">
   </div>
 </div>
