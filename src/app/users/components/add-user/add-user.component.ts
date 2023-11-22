@@ -53,7 +53,7 @@ export class AddUserComponent {
     let dateOfBirthControl = new FormControl(this.userData.dateOfBirth, [this.ageValidator()]);
 
     if (dateOfBirthControl.invalid) {
-      console.log('Debes ser mayor de 18 años para continuar.');
+      this.errorMessage = 'Debes ser mayor de 18 años para continuar.';
       return;
     }
 
