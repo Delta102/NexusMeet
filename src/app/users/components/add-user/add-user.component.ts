@@ -3,6 +3,7 @@ import { ModalCommunicationService } from 'src/app/events/services/visualservice
 import { UserService } from '../../services/user.service';
 import { UserData } from '../../interfaces/user-data.interface';
 import { Router } from '@angular/router';
+import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'add-user',
@@ -49,13 +50,20 @@ export class AddUserComponent {
   onSubmit() {
     this.userData.username = this.userData.email;
 
-    //const formattedDate = this.userData.lastLogin.toString();
+    let dateOfBirthControl = new FormControl(this.userData.dateOfBirth, [this.ageValidator()]);
+
+    if (dateOfBirthControl.invalid) {
+      console.log('Debes ser mayor de 18 años para continuar.');
+      return;
+    }
+
     const dateOfBirth = new Date(this.userData.dateOfBirth);
     const formattedDateBirth = `${dateOfBirth.getFullYear()}-${(dateOfBirth.getMonth() + 1)
       .toString()
       .padStart(2, '0')}-${dateOfBirth.getDate().toString().padStart(2, '0')}`;
 
     const userPromotorData = new FormData();
+
 
     userPromotorData.append('id', this.userData.id.toString());
     userPromotorData.append('password', this.userData.password);
@@ -90,4 +98,12 @@ export class AddUserComponent {
 
     );
   }
+
+  ageValidator(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const forbidden = new Date(control.value) >= new Date(new Date().setFullYear(new Date().getFullYear() - 18));
+      return forbidden ? {'forbiddenAge': {value: control.value}} : null;
+    };
+  }
+  
 }

@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { QrComponent } from './qr/qr.component';
 import { AssistantComponent } from './assistant/assistant.component';
+import { ListAssistsComponent } from './list-assists/list-assists.component';
 
 @NgModule({
   declarations: [
     BuyEntryComponent,
     QrComponent,
+    ListAssistsComponent,
     AssistantComponent,
   ],
   imports: [

@@ -1,0 +1,61 @@
+<style>
+    .rounded-box {
+      border-radius: 15px;
+    }
+  </style>
+  
+  <div class="bg-white rounded-lg p-4 h-full">
+    <div class="flex">
+      <div class="mt-4 md:mt-0 flex flex-col justify-center items-center">
+        <div class="flex justify-center items-center">
+          <img
+            src="assets/images/logo/logo_black.png"
+            width="12%"
+            alt=""
+            srcset=""
+          />
+  
+        <div class="mt-4 items-centers">
+          <h2 class="text-2xl font-semibold">Listado de Mis Asistencias</h2>
+  
+          <div
+            *ngFor="let event of eventData"
+            class="flex items-center justify-between border-b border-gray-300 py-2"
+          >
+            <div class="flex items-center space-x-4">
+              <div class="w-20 bg-gray-200 rounded-full">
+                <img
+                  [src]="'https://nm-service.onrender.com' + event['eventImage']"
+                  alt=""
+                  srcset=""
+                  class="object-cover rounded-full"
+                />
+              </div>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold">
+                {{ event['event_name'] }}
+              </h3>
+              <p class="text-gray-600">Entradas: S/.{{ event['entryPrice'] }}</p>
+            </div>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <div class="md:flex items-center">
+              <!-- <p class="text-lg font-semibold md:mr-2 text-center">
+                {{ event.dateEventStart}}
+                {{ event.dateEventStart}}
+              </p>
+              <p class="text-lg font-semibold hidden md:block">&nbsp;</p>
+              <button
+                class="text-white bg-gradient-to-br from-blue-600 via-slate to-blue-950 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 md:mt-0"
+              >
+                Puntuar Evento
+              </button> -->
+  
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+  

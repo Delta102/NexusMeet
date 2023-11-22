@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { EntryResponse } from 'src/app/entry/interfaces/entry-response.interface';
-import { EventService } from 'src/app/events/services/event.service';
 import { UserService } from 'src/app/users/services/user.service';
 import { EventData } from '../../../../events/interfaces/event-data.interface';
 
@@ -10,7 +9,7 @@ import { EventData } from '../../../../events/interfaces/event-data.interface';
   templateUrl: './entry-by-user.component.html',
   styles: [],
 })
-export class EntryByUserComponent {
+export class  EntryByUserComponent {
   entryData!: EntryResponse[];
   eventData: EventData[] = [];
 
@@ -19,7 +18,6 @@ export class EntryByUserComponent {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private eventService: EventService
   ) {
     this.eventData = [];
     this.route.params.subscribe((params: Params) => {
